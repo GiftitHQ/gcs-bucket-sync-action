@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 # Auth
 echo "$INPUT_SECRETS" > /secrets.json
