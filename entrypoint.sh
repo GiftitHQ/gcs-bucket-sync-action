@@ -43,6 +43,7 @@ if [ $? -ne 0 ]; then
   exit 1
 fi
 
+echo "No-cache: $INPUT_NO_CACHE"
 # Check if no-cache is set to true
 if [ "$INPUT_NO_CACHE" = "true" ]; then
   # Set Cache-Control header for all objects in the synced directory
