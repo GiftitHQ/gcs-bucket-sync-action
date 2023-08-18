@@ -17,6 +17,10 @@ inputs:
     description: Regex for including files/dirs
     required: false
     default: '.*'
+  no-cache:
+    description: Disable cache
+    required: false
+    default: 'true'
   # exclude:
   #   description: Regex for excluding files/dirs
   #   required: false

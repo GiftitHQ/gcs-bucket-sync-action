@@ -43,6 +43,14 @@ if [ $? -ne 0 ]; then
   exit 1
 fi
 
+# Check if no-cache is set to true
+if [ "$INPUT_NO_CACHE" = "true" ]; then
+  # Set Cache-Control header for all objects in the synced directory
+  echo "Setting Cache-Control headers..."
+  gsutil -m setmeta -h "Cache-Control:no-cache" gs://$INPUT_BUCKET/$INPUT_SYNC_DIR/**
+  echo "Done."
+fi
+
 # Clean up temporary directory
 rm -r /tmp/sync-dir
 
