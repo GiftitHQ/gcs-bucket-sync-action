@@ -7,6 +7,7 @@ rm /secrets.json
 # Sync files to bucket
 echo "Syncing bucket $BUCKET ..."
 gsutil -m rsync -r -c -d -x "$INPUT_EXCLUDE" /github/workspace/ gs://$INPUT_BUCKET/$INPUT_SYNC_DIR
+gsutil -m cp -r -h "Content-Type:text/javascript" gs://$INPUT_BUCKET/$INPUT_SYNC_DIR/*.mjs gs://$INPUT_BUCKET/$INPUT_SYNC_DIR/
 if [ $? -ne 0 ]; then
     echo "Syncing failed"
     exit 1
