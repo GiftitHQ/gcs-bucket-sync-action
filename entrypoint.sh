@@ -17,14 +17,21 @@ patterns=(${include_files//|/ })
 
 # Copy files and create directories
 for pattern in "${patterns[@]}"; do
-  # Get directory from pattern
-  dir=$(dirname "$pattern")
+  # Full source path
+  src="/github/workspace/$pattern"
+  
+  # Destination path
+  dest="/tmp/sync-dir/$pattern"
 
-  # Create dir in tmp folder
-  mkdir -p "/tmp/sync-dir/$dir"
-
-  # Copy files
-  find /github/workspace/ -regex "$pattern" -exec cp --parents \{\} "/tmp/sync-dir/$dir/" \;
+  if [ -d "$src" ]; then
+    # Source is a directory; create the full path and copy the content
+    mkdir -p "$dest"
+    cp -r "$src"/* "$dest/"
+  else
+    # Source is a file; create the parent directory and copy the file
+    mkdir -p "$(dirname "$dest")"
+    cp "$src" "$dest"
+  fi
 
 done
 
